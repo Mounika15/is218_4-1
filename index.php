@@ -1,6 +1,5 @@
 <?php
 require_once('database.php');
-
 // Get category ID
 if (!isset($category_id)) {
     $category_id = filter_input(INPUT_GET, 'category_id', 
@@ -10,7 +9,7 @@ if (!isset($category_id)) {
     }
 }
 // Get name for selected category
-$queryCategory = 'SELECT * FROM categories
+$queryCategory = 'SELECT * FROM categories_guitar1
                   WHERE categoryID = :category_id';
 $statement1 = $db->prepare($queryCategory);
 $statement1->bindValue(':category_id', $category_id);
@@ -18,18 +17,15 @@ $statement1->execute();
 $category = $statement1->fetch();
 $category_name = $category['categoryName'];
 $statement1->closeCursor();
-
-
 // Get all categories
-$query = 'SELECT * FROM categories
+$query = 'SELECT * FROM categories_guitar1
                        ORDER BY categoryID';
 $statement = $db->prepare($query);
 $statement->execute();
 $categories = $statement->fetchAll();
 $statement->closeCursor();
-
 // Get products for selected category
-$queryProducts = 'SELECT * FROM products
+$queryProducts = 'SELECT * FROM products_guitar1
                   WHERE categoryID = :category_id
                   ORDER BY productID';
 $statement3 = $db->prepare($queryProducts);
